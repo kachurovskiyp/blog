@@ -1,6 +1,12 @@
+import React from "react";
+import PostEditForm from "../../features/PostEditForm/PostEditForm";
+
 const PostEdit = () => {
   return (
-    <h2>PostEdit</h2>
+    <React.Fragment>
+      <h2>PostEdit</h2>
+      <PostEditForm />
+    </React.Fragment>
   )
 }
 

@@ -20,7 +20,6 @@ const PostPage = () => {
   if(!id) navigate(routing.home);
 
   const post = useSelector(state => getPostById(state, id))[0];
-  console.log(post);
 
   const deleteHandler = () => {
     setModalActive(true);
