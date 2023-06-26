@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router';
+import { routing } from './components/common/routing';
 
 import { Container } from 'react-bootstrap';
 
@@ -17,11 +18,11 @@ function App() {
     <Container>
       <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/post/:id' element={<PostPage />} />
-        <Route path='/post/add' element={<PostAdd />} />
-        <Route path='/post/edit/:id' element={<PostEdit />} />
+        <Route path={routing.home} element={<Home />} />
+        <Route path={routing.about} element={<About />} />
+        <Route path={routing.post} element={<PostPage />} />
+        <Route path={routing.postAdd} element={<PostAdd />} />
+        <Route path={routing.postEdit} element={<PostEdit />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styles from './Post.module.scss';
 
+import { makePostLink } from "../../common/routing";
+
 const Post = props => {
    return (
     <article className={styles.post}>
@@ -8,7 +10,7 @@ const Post = props => {
       <p><span>Author: </span>{props.post.author}</p>
       <p><span>Published: </span>{props.post.publishedDate}</p>
       <p className={styles.desc}>{props.post.shortDescription}</p>
-      <Link to={`/post/${props.post.id}`} className="btn btn-primary">Read more</Link>
+      <Link to={makePostLink(props.post.id)} className="btn btn-primary">Read more</Link>
     </article>
   )
 }

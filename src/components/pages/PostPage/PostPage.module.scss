@@ -1,0 +1,27 @@
+.post {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+
+  padding: 20px;
+  margin: 0 auto;
+
+  & p {
+    margin: 0;
+  }
+
+  & span {
+    font-weight: bold;
+  }
+
+  .desc {
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .post {
+    width: 100%;
+  }
+}
+
