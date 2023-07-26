@@ -20,6 +20,7 @@ const PostPage = () => {
   if(!id) navigate(routing.home);
 
   const post = useSelector(state => getPostById(state, id))[0];
+  const date = new Date(post.publishedDate);
 
   const deleteHandler = () => {
     setModalActive(true);
@@ -36,8 +37,8 @@ const PostPage = () => {
       <article>
         <h3>{post.title}</h3>
         <p><span>Author: </span>{post.author}</p>
-        <p><span>Published: </span>{post.publishedDate}</p>
-        <p className={styles.desc}>{post.content}</p>
+        <p><span>Published: </span>{date.toLocaleDateString()}</p>
+        <p className={styles.desc} dangerouslySetInnerHTML={{ __html: post.content }}></p>
       </article>
       <div>
         <Link className='btn btn-outline-info me-2' to={makeEditLink(post.id)}>Edit</Link>
