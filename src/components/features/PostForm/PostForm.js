@@ -19,6 +19,7 @@ import { useRef, useState } from 'react';
 
 const PostForm = ({ role = 'add' }) => {
   const [startDate, setStartDate] = useState(new Date());
+  const [contentError, setContentError] = useState(false);
 
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
 
@@ -31,7 +32,6 @@ const PostForm = ({ role = 'add' }) => {
   const payload = {};
 
   const submitHandler = () => {
-
     const formData = new FormData(postForm.current);
 
     if (role === 'add') formData.append('id', shortid());
@@ -42,8 +42,12 @@ const PostForm = ({ role = 'add' }) => {
 
     if (role === 'edit') payload.id = id;
 
-    dispatch(role === 'add' ? addPost(payload) : editPost(payload));
-    navigate(routing.home);
+    if(payload.content) {
+      dispatch(role === 'add' ? addPost(payload) : editPost(payload));
+      navigate(routing.home);
+    } else {
+      setContentError(true);
+    }
   };
 
   const changeEditorHandler = content => {
@@ -100,6 +104,7 @@ const PostForm = ({ role = 'add' }) => {
 
       <label htmlFor='main-content'>Main content</label>
       <ReactQuill id='content' theme='snow' value={post ? post.content : ''} onChange={changeEditorHandler} />
+      {contentError && <small className='d-block form-text text-danger mt-2'>This field is required</small>}
       <button className='btn btn-primary' type='submit'>{post ? 'Edit post' : 'Add Post'}</button>
     </form>
   )
