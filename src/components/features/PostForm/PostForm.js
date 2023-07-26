@@ -14,21 +14,21 @@ import { routing } from '../../common/routing';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addPost, editPost, getPostById } from '../../../redux/postsRedux';
+import { getAllCategories } from '../../../redux/categoriesReducer';
 
 import { useRef, useState } from 'react';
 
 const PostForm = ({ role = 'add' }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [contentError, setContentError] = useState(false);
-
   const { register, handleSubmit: validate, formState: { errors } } = useForm();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const postForm = useRef();
 
   const { id } = useParams();
   const post = useSelector(state => getPostById(state, id))[0];
+  const categories = useSelector(state => getAllCategories(state));
   const payload = {};
 
   const submitHandler = () => {
@@ -42,7 +42,7 @@ const PostForm = ({ role = 'add' }) => {
 
     if (role === 'edit') payload.id = id;
 
-    if(payload.content) {
+    if (payload.content) {
       dispatch(role === 'add' ? addPost(payload) : editPost(payload));
       navigate(routing.home);
     } else {
@@ -83,6 +83,22 @@ const PostForm = ({ role = 'add' }) => {
         className='form-control' id='author' name='author' type='text'
       />
       {errors.author && <small className='d-block form-text text-danger mt-2'>{errors.author.message}</small>}
+
+      <label htmlFor='category'>Category</label>
+      <select id='category' name='category' className='form-control'>
+        {categories.map(
+          (category, index) => {
+            return (
+              <option
+                key={index}
+                value={category}
+                selected={post && post.category === category ? 'selected' : ''}>
+                  {category}
+              </option>
+            )
+          }
+        )}
+      </select>
 
       <label htmlFor='pablished'>Pablished</label>
       <DatePicker name='publishedDate' className='form-control' selected={startDate} onChange={(date) => setStartDate(date)} />

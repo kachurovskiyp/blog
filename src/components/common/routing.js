@@ -8,4 +8,6 @@ export const routing = {
   post: '/post/:id',
   postAdd: '/post/add',
   postEdit: '/post/edit/:id',
+  categories: 'categories',
+  category: '/category/:category'
 }

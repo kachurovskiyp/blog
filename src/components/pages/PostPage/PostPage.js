@@ -38,6 +38,7 @@ const PostPage = () => {
         <h3>{post.title}</h3>
         <p><span>Author: </span>{post.author}</p>
         <p><span>Published: </span>{date.toLocaleDateString()}</p>
+        <p><span>Category: </span>{post.category}</p>
         <p className={styles.desc} dangerouslySetInnerHTML={{ __html: post.content }}></p>
       </article>
       <div>

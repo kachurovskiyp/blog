@@ -11,6 +11,7 @@ const Post = props => {
       <h3>{props.post.title}</h3>
       <p><span>Author: </span>{props.post.author}</p>
       <p><span>Published: </span>{date.toLocaleDateString()}</p>
+      <p><span>Category: </span>{props.post.category}</p>
       <p className={styles.desc}>{props.post.shortDescription}</p>
       <Link to={makePostLink(props.post.id)} className="btn btn-primary">Read more</Link>
     </article>
